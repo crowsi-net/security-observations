@@ -1,0 +1,269 @@
+{
+  "repository": "crowsi-net/security-observations",
+  "purpose": "Reusable security observations components; product composition belongs to vPremises",
+  "responsibility_boundary": "Own the named security/transport mechanism and its explicit trust boundary. Product account/storage/UI composition belongs to the consumer. Tests must not substitute declarations for enforced authority or live environment acceptance.",
+  "packages": [
+    {
+      "manifest": "crates/crowsi-boundary-monitor/Cargo.toml",
+      "package": "crowsi-boundary-monitor",
+      "ecosystem": "rust",
+      "description": "Provider-neutral network isolation boundary evaluation for Crowsi",
+      "interfaces": {
+        "lib": "crates/crowsi-boundary-monitor/src/lib.rs",
+        "features": {},
+        "bins": [],
+        "public_modules": [],
+        "public_reexports": [
+          "coverage::{\n    COVERAGE_INPUT_SCHEMA, COVERAGE_SNAPSHOT_SCHEMA, ControlAction, ControlAuthority,\n    ControlCoverageInputV2, ControlCoverageSnapshotV2, CoverageAssetInputV2, CoverageAssetResultV2,\n    CoverageState, EnforcerStatus, LifelineStatus, SensorStatus, ValidatedControlCoverageInputV2,\n    evaluate_coverage, parse_coverage_input, validate_coverage_input,\n}",
+          "evaluate::evaluate",
+          "model::{BoundaryInputV1, BoundarySnapshotV1}",
+          "validation::{MAX_DOCUMENT_BYTES, parse_input}"
+        ],
+        "implicit_bins": []
+      },
+      "declared_commands": {}
+    },
+    {
+      "manifest": "crates/crowsi-host-network-sensor/Cargo.toml",
+      "package": "crowsi-host-network-sensor",
+      "ecosystem": "rust",
+      "description": "Read-only metadata sensor for the local Linux network namespace",
+      "interfaces": {
+        "lib": "crates/crowsi-host-network-sensor/src/lib.rs",
+        "features": {},
+        "bins": [],
+        "public_modules": [],
+        "public_reexports": [
+          "error::SensorError",
+          "evaluate::evaluate_drift",
+          "input::read_baseline",
+          "model::{\n    AddressFamilyV1, BASELINE_SCHEMA_V1, BaselineV1, BindScopeV1, FINDING_SCHEMA_V1, FindingCodeV1,\n    FindingV1, ListenerV1, ProtocolV1, RouteStateV1, RoutesV1, SIGNAL_TRUST_UNSIGNED_LOCAL,\n    SNAPSHOT_SCHEMA_V1, SnapshotStatusV1, SnapshotV1,\n}",
+          "sample::{SAMPLE_TIME, sample_baseline, sample_snapshot}",
+          "sensor::observe_host",
+          "time::{now_rfc3339, unix_millis_to_rfc3339}"
+        ],
+        "implicit_bins": []
+      },
+      "declared_commands": {}
+    },
+    {
+      "manifest": "crates/crowsi-incident-coordinator/Cargo.toml",
+      "package": "crowsi-incident-coordinator",
+      "ecosystem": "rust",
+      "description": "Deterministic incident coordination state machine for Crowsi",
+      "interfaces": {
+        "lib": "crates/crowsi-incident-coordinator/src/lib.rs",
+        "features": {},
+        "bins": [],
+        "public_modules": [],
+        "public_reexports": [
+          "authorization::CommandAuthorizationV1",
+          "canonical::IncidentCanonicalPayloadV1",
+          "challenge::MonotonicChallengeV1",
+          "checkpoint::{CoordinatorCheckpointV1, ExternalMonotonicAnchorV1}",
+          "command::CoordinatorCommandV1",
+          "coordinator::IncidentCoordinator",
+          "definition::{EnforcementRequirementV1, IncidentDefinitionV1, TargetDefinitionV1}",
+          "error::CoordinatorError",
+          "event::{IncidentEventKindV1, IncidentEventV1}",
+          "monitoring::{MonitoringEvidenceV1, MonitoringOutcome}",
+          "monotonic::{AtomicReleaseConsumerV1, AtomicReleaseRequestV1, MonotonicHeadReaderV1}",
+          "phase::IncidentPhase",
+          "receipt::CoordinatorReceiptV1",
+          "recovery::RecoveryApprovalV1",
+          "release::CommandReleaseV1",
+          "snapshot::IncidentSnapshotV1",
+          "state::CoordinatorStateV1",
+          "target::{\n    DesiredTargetState, ObservedTargetState, OperationMode, TargetStateV1, TransactionState,\n}",
+          "trust::{CoordinatorTrustV1, TrustAnchorV1, TrustRole, TrustScope}",
+          "validation::Validate",
+          "verification::{IndependentObservedOutcome, IndependentVerificationArtifactV1}"
+        ],
+        "implicit_bins": []
+      },
+      "declared_commands": {}
+    },
+    {
+      "manifest": "crates/crowsi-production-assurance/Cargo.toml",
+      "package": "crowsi-production-assurance",
+      "ecosystem": "rust",
+      "description": "Fail-closed production evidence gate for Crowsi network controls",
+      "interfaces": {
+        "lib": "crates/crowsi-production-assurance/src/lib.rs",
+        "features": {},
+        "bins": [],
+        "public_modules": [],
+        "public_reexports": [
+          "context_model::AssuranceContext",
+          "error::AssuranceError",
+          "model::{\n    AssuranceControl, AssuranceControls, EvidenceKind, EvidenceOrigin, EvidencePayload,\n    ReadinessBundle, ReadinessDecision, ReadinessState, SignatureAlgorithm,\n}",
+          "runtime::ProductionAssurance",
+          "signed::SignedEvidence",
+          "trust::{TrustError, TrustStore}"
+        ],
+        "implicit_bins": []
+      },
+      "declared_commands": {}
+    }
+  ],
+  "schema_definitions": [
+    "crates/crowsi-boundary-monitor/schemas/boundary-input-v1.schema.json",
+    "crates/crowsi-boundary-monitor/schemas/boundary-snapshot-v1.schema.json",
+    "crates/crowsi-boundary-monitor/schemas/control-coverage-snapshot-v2.schema.json",
+    "crates/crowsi-boundary-monitor/schemas/control-coverage-v2.schema.json",
+    "crates/crowsi-host-network-sensor/schemas/host-network-baseline-v1.schema.json",
+    "crates/crowsi-host-network-sensor/schemas/host-network-finding-v1.schema.json",
+    "crates/crowsi-host-network-sensor/schemas/host-network-snapshot-v1.schema.json",
+    "crates/crowsi-incident-coordinator/schemas/command-release-v1.schema.json",
+    "crates/crowsi-incident-coordinator/schemas/coordinator-checkpoint-v1.schema.json",
+    "crates/crowsi-incident-coordinator/schemas/coordinator-command-v1.schema.json",
+    "crates/crowsi-incident-coordinator/schemas/coordinator-receipt-v1.schema.json",
+    "crates/crowsi-incident-coordinator/schemas/coordinator-state-v1.schema.json",
+    "crates/crowsi-incident-coordinator/schemas/coordinator-trust-v1.schema.json",
+    "crates/crowsi-incident-coordinator/schemas/incident-event-v1.schema.json",
+    "crates/crowsi-incident-coordinator/schemas/independent-verification-v1.schema.json",
+    "crates/crowsi-incident-coordinator/schemas/monitoring-evidence-v1.schema.json",
+    "crates/crowsi-incident-coordinator/schemas/monotonic-anchor-v1.schema.json",
+    "crates/crowsi-production-assurance/schemas/production-readiness-v1.schema.json"
+  ],
+  "test_sources": [
+    "crates/crowsi-boundary-monitor/src/coverage/validation.rs",
+    "crates/crowsi-boundary-monitor/src/main.rs",
+    "crates/crowsi-boundary-monitor/src/validation.rs",
+    "crates/crowsi-boundary-monitor/tests/contracts.rs",
+    "crates/crowsi-boundary-monitor/tests/coverage.rs",
+    "crates/crowsi-host-network-sensor/src/input.rs",
+    "crates/crowsi-host-network-sensor/src/main.rs",
+    "crates/crowsi-host-network-sensor/src/sensor/mod.rs",
+    "crates/crowsi-host-network-sensor/src/sensor/route.rs",
+    "crates/crowsi-host-network-sensor/src/sensor/route/tests.rs",
+    "crates/crowsi-host-network-sensor/src/sensor/socket.rs",
+    "crates/crowsi-host-network-sensor/src/sensor/socket/tests.rs",
+    "crates/crowsi-host-network-sensor/src/time.rs",
+    "crates/crowsi-host-network-sensor/src/validation.rs",
+    "crates/crowsi-host-network-sensor/tests/contracts.rs",
+    "crates/crowsi-host-network-sensor/tests/drift.rs",
+    "crates/crowsi-host-network-sensor/tests/drift/unknown_source.rs",
+    "crates/crowsi-incident-coordinator/src/coordinator/persistence/commit.rs",
+    "crates/crowsi-incident-coordinator/src/time.rs",
+    "crates/crowsi-incident-coordinator/src/validation.rs",
+    "crates/crowsi-incident-coordinator/tests/anchor_security.rs",
+    "crates/crowsi-incident-coordinator/tests/checkpoint_invariants.rs",
+    "crates/crowsi-incident-coordinator/tests/checkpoint_security.rs",
+    "crates/crowsi-incident-coordinator/tests/command_release_security.rs",
+    "crates/crowsi-incident-coordinator/tests/command_release_security/head_advance.rs",
+    "crates/crowsi-incident-coordinator/tests/containment_aggregation.rs",
+    "crates/crowsi-incident-coordinator/tests/containment_aggregation/partial_failure.rs",
+    "crates/crowsi-incident-coordinator/tests/containment_unknown.rs",
+    "crates/crowsi-incident-coordinator/tests/durable_recovery.rs",
+    "crates/crowsi-incident-coordinator/tests/durable_replay.rs",
+    "crates/crowsi-incident-coordinator/tests/event_schema_variants.rs",
+    "crates/crowsi-incident-coordinator/tests/failure_states.rs",
+    "crates/crowsi-incident-coordinator/tests/failure_states/restoration.rs",
+    "crates/crowsi-incident-coordinator/tests/harnesses/contracts.rs",
+    "crates/crowsi-incident-coordinator/tests/harnesses/recovery.rs",
+    "crates/crowsi-incident-coordinator/tests/production_event_boundary.rs",
+    "crates/crowsi-incident-coordinator/tests/receipt_immutability.rs",
+    "crates/crowsi-incident-coordinator/tests/receipt_immutability/duplicates.rs",
+    "crates/crowsi-incident-coordinator/tests/recovery_control.rs",
+    "crates/crowsi-incident-coordinator/tests/recovery_happy_path.rs",
+    "crates/crowsi-incident-coordinator/tests/replay_and_epoch.rs",
+    "crates/crowsi-incident-coordinator/tests/schema_documents.rs",
+    "crates/crowsi-incident-coordinator/tests/schema_instance_shapes.rs",
+    "crates/crowsi-incident-coordinator/tests/schema_instance_shapes/properties.rs",
+    "crates/crowsi-incident-coordinator/tests/security_event_boundaries.rs",
+    "crates/crowsi-incident-coordinator/tests/state_machine.rs",
+    "crates/crowsi-incident-coordinator/tests/support/authorization.rs",
+    "crates/crowsi-incident-coordinator/tests/support/authorization/builders.rs",
+    "crates/crowsi-incident-coordinator/tests/support/authorization/document.rs",
+    "crates/crowsi-incident-coordinator/tests/support/checkpoint.rs",
+    "crates/crowsi-incident-coordinator/tests/support/clock.rs",
+    "crates/crowsi-incident-coordinator/tests/support/common.rs",
+    "crates/crowsi-incident-coordinator/tests/support/crypto.rs",
+    "crates/crowsi-incident-coordinator/tests/support/crypto/anchors.rs",
+    "crates/crowsi-incident-coordinator/tests/support/crypto/signatures.rs",
+    "crates/crowsi-incident-coordinator/tests/support/definition.rs",
+    "crates/crowsi-incident-coordinator/tests/support/events.rs",
+    "crates/crowsi-incident-coordinator/tests/support/executor.rs",
+    "crates/crowsi-incident-coordinator/tests/support/head.rs",
+    "crates/crowsi-incident-coordinator/tests/support/mod.rs",
+    "crates/crowsi-incident-coordinator/tests/support/monitoring.rs",
+    "crates/crowsi-incident-coordinator/tests/support/receipts.rs",
+    "crates/crowsi-incident-coordinator/tests/support/workflow.rs",
+    "crates/crowsi-incident-coordinator/tests/support/workflow/verification.rs",
+    "crates/crowsi-production-assurance/src/evaluate/inspection.rs",
+    "crates/crowsi-production-assurance/src/time_anchor.rs",
+    "crates/crowsi-production-assurance/src/time_anchor/tests.rs",
+    "crates/crowsi-production-assurance/tests/p256.rs",
+    "crates/crowsi-production-assurance/tests/production_readiness.rs",
+    "crates/crowsi-production-assurance/tests/support/context.rs",
+    "crates/crowsi-production-assurance/tests/support/controls.rs",
+    "crates/crowsi-production-assurance/tests/support/mod.rs",
+    "crates/crowsi-production-assurance/tests/support/trust.rs",
+    "crates/crowsi-production-assurance/tests/time_anchor_security.rs",
+    "crates/crowsi-production-assurance/tests/trust_and_schema.rs"
+  ],
+  "example_sources": [
+    "crates/crowsi-boundary-monitor/examples/boundary-input.sample.json",
+    "crates/crowsi-boundary-monitor/examples/control-coverage.sample.json",
+    "crates/crowsi-host-network-sensor/examples/baseline.sample.json",
+    "crates/crowsi-host-network-sensor/examples/snapshot.sample.json"
+  ],
+  "workflow_definitions": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "jobs": [
+        {
+          "job": "verify",
+          "condition": null,
+          "runs_on": "ubuntu-24.04",
+          "steps": [
+            {
+              "name": null,
+              "run": null,
+              "uses": "actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "condition": null
+            },
+            {
+              "name": null,
+              "run": "rustup toolchain install 1.97 --profile minimal --component rustfmt --component clippy",
+              "uses": null,
+              "condition": null
+            },
+            {
+              "name": "Verify preserved source history",
+              "run": "git bundle verify docs/source-history/source.bundle",
+              "uses": null,
+              "condition": null
+            },
+            {
+              "name": null,
+              "run": "cargo +1.97 fmt --all -- --check",
+              "uses": null,
+              "condition": null
+            },
+            {
+              "name": null,
+              "run": "cargo +1.97 clippy --locked --workspace --all-targets --all-features -- -D warnings",
+              "uses": null,
+              "condition": null
+            },
+            {
+              "name": null,
+              "run": "cargo +1.97 test --locked --workspace --all-targets --all-features",
+              "uses": null,
+              "condition": null
+            },
+            {
+              "name": null,
+              "run": "cargo +1.97 test --locked --workspace --doc --all-features",
+              "uses": null,
+              "condition": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "evidence_policy": "Declarations and source paths are not proof of an executed acceptance. Exact CI head and result are recorded separately. No live accounts or production acceptance is inferred."
+}
