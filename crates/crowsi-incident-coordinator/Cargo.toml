@@ -17,7 +17,7 @@ automatic-restore = false
 
 
 [dependencies]
-base64 = "0.22.1"
+base64 = "0.23.1"
 crowsi-control-contracts = { version = "=0.1.0" }
 ed25519-dalek = "2.2.0"
 getrandom = "0.2.17"
