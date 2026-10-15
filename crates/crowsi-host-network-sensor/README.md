@@ -52,4 +52,4 @@ incompatible v1 values.
 
 ## Product responsibility
 
-This component is maintained in [vpremises/vpremises-security](https://github.com/vpremises/vpremises-security). Use the [product README](../../README.md) for composition, use cases and trust boundaries.
+This component is maintained in [crowsi-net/security-observations](https://github.com/crowsi-net/security-observations). Use the [repository README](../../README.md) for composition, use cases and trust boundaries.
