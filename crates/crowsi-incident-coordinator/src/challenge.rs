@@ -22,7 +22,7 @@ impl MonotonicChallengeV1 {
         identifier("deployment_id", deployment_id)?;
         identifier("incident_id", incident_id)?;
         let mut bytes = [0_u8; 32];
-        getrandom::getrandom(&mut bytes)
+        getrandom::fill(&mut bytes)
             .map_err(|_| CoordinatorError::new("challenge", "OS randomness unavailable"))?;
         let (issued_at, expires_at) = system_utc_window(CHALLENGE_TTL_SECONDS)?;
         Ok(Self {

@@ -31,7 +31,7 @@ impl AssuranceContext {
             push_text(&mut bytes, value);
         }
         bytes.extend_from_slice(&self.fence_epoch.to_be_bytes());
-        format!("{:x}", Sha256::digest(bytes))
+        hex::encode(Sha256::digest(bytes))
     }
 
     pub(crate) fn expected(&self, kind: EvidenceKind) -> (&str, &str) {
