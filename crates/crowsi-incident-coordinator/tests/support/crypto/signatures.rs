@@ -53,7 +53,7 @@ fn signed(key_id: &str, secret: [u8; 32], payload: &[u8]) -> SignedDigestV1 {
     SignedDigestV1 {
         algorithm: SignatureAlgorithm::Ed25519,
         key_id: key_id.to_owned(),
-        digest: format!("sha256:{digest:x}"),
+        digest: format!("sha256:{}", hex::encode(digest)),
         signature: URL_SAFE_NO_PAD.encode(SigningKey::from_bytes(&secret).sign(payload).to_bytes()),
     }
 }
