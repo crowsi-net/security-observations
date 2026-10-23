@@ -1,0 +1,15 @@
+{
+  "schema": "source-consolidation-v1",
+  "owner_repository": "crowsi-net/security-observations",
+  "components": [
+    {
+      "id": "vpremises-security",
+      "original_repository": "vpremises/vpremises-security",
+      "source_head": "9c95647ce3ba4dd0862afad569f5ce42cd760850",
+      "subpath": ".",
+      "owner_repository": "crowsi-net/security-observations",
+      "retired_archive_sha256": "0a4be4130c50223c201ad9204f5e8822b104c85956011f596fae1cd2019ba7f3"
+    }
+  ],
+  "status": "Current source is maintained only in this owner. Original repository/revision and retired archive digest are provenance only; archive restoration is retired. Current manifests and owner workflows define publication; public availability is verified separately."
+}
