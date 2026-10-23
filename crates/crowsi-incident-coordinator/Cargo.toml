@@ -19,7 +19,7 @@ automatic-restore = false
 [dependencies]
 hex = "0.4.3"
 base64 = "0.23.1"
-crowsi-control-contracts = { version = "=0.1.0" }
+crowsi-control-contracts = { version = "=0.1.1" }
 ed25519-dalek = "3.0.0"
 getrandom = "0.4.3"
 serde = { version = "1.0.228", features = ["derive"] }
